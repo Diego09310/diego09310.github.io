@@ -771,6 +771,10 @@ body:not(.post-template) .post-title {
     color: #9EABB3;
 }
 
+h1 + .post-meta {
+    margin: -1rem 0 1.5rem 0;
+}
+
 .author-thumb {
     width: 24px;
     height: 24px;
