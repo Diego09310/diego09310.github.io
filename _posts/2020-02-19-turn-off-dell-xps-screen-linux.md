@@ -67,6 +67,13 @@ Once I had the script working, next step is to allow my user to execute this scr
 
 This line allows the user `diego`, can run, in all hosts, the file `toggleBacklight.sh` without password. Once this new rule is applied, we can run the script, using `sudo` without password.
 
+We also need another step regarding security. Right now, the script `toggleBacklight.sh` can be executed as a root user without the password. This is a security problem as if an attacker gains access to this user account, it can modify the file and execute anything with superuser rights. To avoid this we need to change the ownership of the file to the root user and remove writing access to others (this may come by default, but I included the command just in case). We do this with these two commands:
+
+```
+sudo chown root:root /<path-to-script>/toggleBacklight.sh
+sudo chmod o-w /<path-to-script>/toggleBacklight.sh
+```
+
 Once this is ready and working, we can create the shortcut. This is probably different depending on the desktop and maybe on the linux distribution, but in Ubuntu is just going to the `Keyboard Shortcuts` menu inside te settings and adding the following custom shortcut:
 
 ```
@@ -88,5 +95,9 @@ Edit sudoers file:
 
 And add this line:  
 `<username> ALL = NOPASSWD: /<path-to-script>/toggleBacklight.sh`
+
+Change ownership to root:  
+`sudo chown root:root /<path-to-script>/toggleBacklight.sh`  
+`sudo chmod o-w /<path-to-script>/toggleBacklight.sh`
 
 Create keyboard shortcut (depends on desktop/distro).
